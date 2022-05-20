@@ -5,9 +5,21 @@ import 'package:m_l_s/models/auth_mode_models.dart';
 import 'package:m_l_s/ui/views/splash/splash_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 
-class SplashView extends StatelessWidget {
+class SplashView extends StatefulWidget {
   const SplashView({Key? key}) : super(key: key);
 
+  @override
+  State<SplashView> createState() => _SplashViewState();
+}
+
+class _SplashViewState extends State<SplashView> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 5), () {
+      AutoRouter.of(context).push(const LoginView());
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SplashViewModel>.reactive(viewModelBuilder: () =>SplashViewModel(),
@@ -15,14 +27,17 @@ class SplashView extends StatelessWidget {
           body: Center(
             child: InkWell(
               onTap: (){
-                // AutoRouter.of(context).push(const LoginView());
-                viewmodel.fetchAuthData();
+                // var navigateToLoginPage = viewmodel.navigateToLoginPage;
+                // if(navigateToLoginPage){
+                //   AutoRouter.of(context).push(const LoginView());
+                // }
               },
-              child: Text(
-                viewmodel.authModeModels?.data?.userEmail??'Splash'
+              child: const Text(
+                'Splash'
               ),
             ),
           ),
         ));
   }
+
 }

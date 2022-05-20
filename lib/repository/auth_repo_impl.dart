@@ -11,9 +11,9 @@ class AuthRepoImpl implements AuthRepo{
 
 
   @override
-  Future<AuthModeModels?> getAuthData() async {
+  Future<AuthModeModels?> getAuthData(String email) async {
     try {
-      Map<String,String> jsonBody = {'email':'load01.bom@middletongroup.in'};
+      Map<String,String> jsonBody = {'email':email};
       dynamic response = await _apiService.postResponse(
           ApiEndPoints().getAuthData,jsonBody);
       final jsonData = AuthModeModels.fromJson(response);
